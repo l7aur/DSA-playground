@@ -8,7 +8,7 @@ public:
 	explicit Vector(int initialSize = 0);
 	
 	// destructor
-	~Vector();
+	~Vector() { delete[] objects; };
 	
 	// copy constructor
 	Vector(const Vector& rhs);
@@ -23,29 +23,29 @@ public:
 	Vector& operator=(Vector&& rhs);
 
 	// index operators
-	Object& operator[](int index);
-	const Object& operator[](int index) const;
+	Object& operator[](int index) { return objects[index]; };
+	const Object& operator[](int index) const { return objects[index]; };
 
 	//methods
 	void resize(int newSize);
 	void reserve(int capacity);
-	bool isEmpty() const;
-	int size();
-	int capacity() const;
+	bool isEmpty() const { return size() == 0; };
+	int size() { return theSize; };
+	int capacity() const { return theCapacity; };
 	void push_back(const Object& x);
 	void push_back(Object&& x);
-	void pop_back();
-	const Object& back() const;
-	const Object& front() const;
+	void pop_back() { --theSize; };
+	const Object& back() const { return objects[theSize - 1]; };
+	const Object& front() const { return objects[0]; };
 
 	// iterator magic
 	typedef Object* iterator;
 	typedef const Object* const_iterator;
 
-	iterator begin();
-	const_iterator begin() const;
-	iterator end();
-	const_iterator end() const;
+	iterator begin() { return &objects[0]; };
+	const_iterator begin() const { return &objects[0]; };
+	iterator end() { return &objects[theSize]; };
+	const_iterator end() const { return &objects[theSize]; };
 
 	static const int SPARE_CAPACITY = 16;
 private:
@@ -68,12 +68,6 @@ inline Vector<Object>::Vector(int initialSize)
 	: theSize(initialSize), theCapacity(initialSize + SPARE_CAPACITY)
 {
 	objects = new Object[theCapacity];
-}
-
-template<typename Object>
-inline Vector<Object>::~Vector()
-{
-	delete[] objects;
 }
 
 template<typename Object>
@@ -111,18 +105,6 @@ inline Vector<Object>& Vector<Object>::operator=(Vector&& rhs)
 }
 
 template<typename Object>
-inline Object& Vector<Object>::operator[](int index)
-{
-	return objects[index];
-}
-
-template<typename Object>
-inline const Object& Vector<Object>::operator[](int index) const
-{
-	return objects[index];
-}
-
-template<typename Object>
 inline void Vector<Object>::resize(int newSize)
 {
 	if (newSize > theCapacity)
@@ -144,24 +126,6 @@ inline void Vector<Object>::reserve(int capacity)
 }
 
 template<typename Object>
-inline bool Vector<Object>::isEmpty() const
-{
-	return size() == 0;
-}
-
-template<typename Object>
-inline int Vector<Object>::size()
-{
-	return theSize;
-}
-
-template<typename Object>
-inline int Vector<Object>::capacity() const
-{
-	return theCapacity;
-}
-
-template<typename Object>
 inline void Vector<Object>::push_back(const Object& x)
 {
 	if (theSize == theCapacity)
@@ -177,44 +141,3 @@ inline void Vector<Object>::push_back(Object&& x)
 	objects[theSize++] = std::move(x);
 }
 
-template<typename Object>
-inline void Vector<Object>::pop_back()
-{
-	theSize--;
-}
-
-template<typename Object>
-inline const Object& Vector<Object>::back() const
-{	
-	return objects[theSize - 1];
-}
-
-template<typename Object>
-inline const Object& Vector<Object>::front() const
-{
-	return objects[0];
-}
-
-template<typename Object>
-inline typename Vector<Object>::iterator Vector<Object>::begin()
-{
-	return &objects[0];
-}
-
-template<typename Object>
-inline typename Vector<Object>::const_iterator Vector<Object>::begin() const
-{
-	return &objects[0];
-}
-
-template<typename Object>
-inline typename Vector<Object>::const_iterator Vector<Object>::end() const
-{
-	return &objects[theSize];
-}
-
-template<typename Object>
-inline typename Vector<Object>::iterator Vector<Object>::end()
-{
-	return &objects[theSize];
-}

@@ -1,11 +1,13 @@
 #include <iostream>
 #include "Vector.h"
+#include "List.h"
 
 void vectorDemo();
+void listDemo();
 
 int main() {
-	vectorDemo();
-
+	//vectorDemo();
+	listDemo();
 	return 0;
 }
 
@@ -28,4 +30,8 @@ void vectorDemo() {
 	s.pop_back();
 	std::cout << s << '\n';
 	std::cout << s[1];
+}
+
+void listDemo() {
+
 }
