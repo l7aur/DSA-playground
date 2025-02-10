@@ -49,21 +49,21 @@ public:
 	int size() const { return theSize; };
 	bool empty() const { return theSize == 0; };
 	void clear();
-	Object& front() { return head->next; };
-	const Object& front() const { return head->next; };
-	Object& back() { return tail->prev; };
-	const Object& back() const { return tail->prev; };
-	void push_front(const Object& x);
-	void push_front(Object&& x);
-	void push_back(const Object& x);
-	void push_back(Object&& x);
-	void pop_front();
-	void pop_back();
+	Object& front() { return *begin(); };
+	const Object& front() const { return *begin(); };
+	Object& back() { return *--end(); };
+	const Object& back() const { return *--end(); };
+	void push_front(const Object& x) { insert(begin(), x); };
+	void push_front(Object&& x) { insert(begin(), std::move(x)); };
+	void push_back(const Object& x) { insert(end(), x); };
+	void push_back(Object&& x) { insert(end(), std::move(x)); };
+	void pop_front() { erase(begin()); };
+	void pop_back() { erase(--end()); };
 
-	iterator begin();
-	const_iterator begin() const;
-	iterator end();
-	const_iterator end() const;
+	iterator begin() { return head->next; };
+	const_iterator begin() const { return head->next; };
+	iterator end() { return tail; };
+	const_iterator end() const { return tail; };
 	iterator insert(iterator itr, const Object& x);
 	iterator insert(iterator itr, Object&& x);
 	iterator erase(iterator itr);
@@ -79,6 +79,8 @@ private:
 // for pretty print
 template <typename Object>
 std::ostream& operator<<(std::ostream& out, const List<Object>& l) {
+	for (typename List<Object>::const_iterator i = l.begin(); i != l.end(); ++i)
+		out << *i << " ";
 	return out;
 }
 
@@ -124,8 +126,10 @@ inline List<Object>& List<Object>::operator=(List&& rhs)
 }
 
 template<typename Object>
-inline void List<Object>::push_front(const Object& x)
+inline void List<Object>::clear()
 {
+	while (!empty())
+		pop_front();
 }
 
 template<typename Object>
@@ -168,6 +172,42 @@ inline typename List<Object>::iterator& List<Object>::iterator::operator++(int)
 	iterator old = *this;
 	++(*this);
 	return old;
+}
+
+template<typename Object>
+inline typename List<Object>::iterator List<Object>::insert(iterator itr, const Object& x)
+{
+	Node* p = itr.current;
+	++theSize;
+	return { p->prev = p->prev->next = new Node{x, p->prev, p} };
+}
+
+template<typename Object>
+inline typename List<Object>::iterator List<Object>::insert(iterator itr, Object&& x)
+{
+	Node* p = itr.current;
+	++theSize;
+	return { p->prev = p->prev->next = new Node{std::move(x), p->prev, p} };
+}
+
+template<typename Object>
+inline typename List<Object>::iterator List<Object>::erase(iterator itr)
+{
+	Node* p = itr.current;
+	iterator retVal{ p->next };
+	p->prev->next = p->next;
+	p->next->prev = p->prev;
+	delete p;
+	--theSize;
+	return retVal;
+}
+
+template<typename Object>
+inline typename List<Object>::iterator List<Object>::erase(iterator from, iterator to)
+{
+	for (iterator i = from; i != to;)
+		i = erase(i);
+	return to;
 }
 
 template<typename Object>

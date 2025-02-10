@@ -33,5 +33,19 @@ void vectorDemo() {
 }
 
 void listDemo() {
+	List<int> l;
+	l.push_back(1);
+	l.push_back(2);
+	l.push_back(3);
+	std::cout << l << '\n';
+	l.pop_front();
+	l.push_front(-1);
+	l.push_front(3);
+	std::cout << l << '\n';
+	l.erase(l.begin());
+	l.erase(++l.begin());
+	std::cout << l << '\n';
+	l.insert(l.begin(), 5);
+	std::cout << l << '\n';
 
 }
