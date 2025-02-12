@@ -14,7 +14,7 @@ public:
 
 	protected:
 		struct List<Object>::Node* current;
-		Object& retrieve() const { return current->data; };
+		const Object& retrieve() const { return current->data; };
 		const_iterator(struct List<Object>::Node* p) : current(p) {};
 
 		friend class List<Object>;

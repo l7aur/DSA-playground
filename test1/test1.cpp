@@ -1,13 +1,19 @@
 #include <iostream>
 #include "Vector.h"
 #include "List.h"
+#include "Queue.h"
+#include "Stack.h"
 
 void vectorDemo();
 void listDemo();
+void queueDemo();
+void stackDemo();
 
 int main() {
 	//vectorDemo();
-	listDemo();
+	//listDemo();
+	queueDemo();
+	//stackDemo();
 	return 0;
 }
 
@@ -48,4 +54,57 @@ void listDemo() {
 	l.insert(l.begin(), 5);
 	std::cout << l << '\n';
 
+}
+
+void queueDemo() {
+	Queue<int> q;
+	q.insert(2);
+	q.pop();
+	q.insert(5);
+	q.insert(10);
+	std::cout << q << '\n';
+	q.insert(20);
+	q.pop();
+	std::cout << q << '\n';
+	
+	Queue<std::string> q2;
+	q2.insert("a");
+	q2.insert("bx");
+	q2.insert("cx");
+	std::cout << q2 << '\n';
+	q2.pop();
+	q2.pop();
+	q2.pop();
+	std::cout << q2 << '\n';
+	q2.insert("hmm");
+	q2.insert("hmm");
+	q2.insert("hmmx");
+	std::cout << q2 << '\n';
+
+	Queue<int> q3;
+	q3.insert(10); q3.insert(20); q3.insert(30);
+	q = q3;
+	std::cout << q << '\n' << q3 << '\n';
+
+}
+
+void stackDemo() {
+	Stack<int> s;
+	s.push(30);
+	s.push(10);
+	s.pop();
+	std::cout << s << '\n';
+	s.push(3);
+	s.push(3);
+	s.push(-1);
+	s.pop();
+	std::cout << s << '\n';
+
+	Stack<std::string> s2;
+	s2.push("europa");
+	s2.push("asia");
+	s2.pop();
+	std::cout << s2 << '\n';
+	s2.push("america");
+	std::cout << s2 << '\n';
 }
