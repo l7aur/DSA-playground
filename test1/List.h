@@ -41,10 +41,10 @@ private:
 public:
 	List() { init(); };
 	~List();
-	List(const List& rhs);
-	List& operator=(const List& rhs);
-	List(const List&& rhs);
-	List& operator=(List&& rhs);
+	List(const List& rhs) noexcept;
+	List& operator=(const List& rhs) noexcept;
+	List(List&& rhs) noexcept;
+	List& operator=(List&& rhs) noexcept;
 
 	int size() const { return theSize; };
 	bool empty() const { return theSize == 0; };
@@ -93,7 +93,7 @@ inline List<Object>::~List()
 }
 
 template<typename Object>
-inline List<Object>::List(const List& rhs)
+inline List<Object>::List(const List& rhs) noexcept
 {
 	init();
 	for (auto& i : rhs)
@@ -101,7 +101,7 @@ inline List<Object>::List(const List& rhs)
 }
 
 template<typename Object>
-inline List<Object>& List<Object>::operator=(const List& rhs)
+inline List<Object>& List<Object>::operator=(const List& rhs) noexcept
 {
 	List<Object> copy = rhs;
 	std::swap(*this, copy);
@@ -109,7 +109,7 @@ inline List<Object>& List<Object>::operator=(const List& rhs)
 }
 
 template<typename Object>
-inline List<Object>::List(const List&& rhs)
+inline List<Object>::List(List&& rhs) noexcept
 	: theSize(rhs.theSize), head(rhs.head), tail(rhs.tail)
 {
 	rhs.theSize = 0;
@@ -117,7 +117,7 @@ inline List<Object>::List(const List&& rhs)
 }
 
 template<typename Object>
-inline List<Object>& List<Object>::operator=(List&& rhs)
+inline List<Object>& List<Object>::operator=(List&& rhs) noexcept
 {
 	std::swap(theSize, rhs.theSize);
 	std::swap(head, rhs.head);

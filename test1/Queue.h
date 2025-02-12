@@ -3,25 +3,42 @@
 #include "List.h"
 
 template<typename Object>
-class Queue : private List<Object> {
+class Queue {
 public:
-	Queue() = default;
-	~Queue() = default;
-	Queue(const Queue<Object>& q) : List<Object>(q) {}
-	Queue& operator=(const Queue<Object>& q) { if (this != &q)  List<Object>::operator=(q); return *this; }
+	Queue() {};
+	~Queue() {};
+	Queue(const Queue<Object>& rhs) noexcept : q(rhs.q) {}
+	Queue& operator=(const Queue<Object>& rhs) noexcept;
 
-	Queue(Queue<Object>&& q) : List<Object>(std::move(q)) {}
-	Queue& operator=(Queue<Object>&& q) { if (this != &q) List<Object>::operator=(std::move(q)); return *this; }
+	Queue(Queue<Object>&& rhs) noexcept : q(std::move(rhs.q)) {}
+	Queue& operator=(Queue<Object>&& rhs) noexcept;
 
-	void insert(const Object& x) { List<Object>::push_back(x); }
-	void insert(Object&& x) { List<Object>::push_back(std::move(x)); }
-	void pop() { List<Object>::pop_front(); }
-	const Object& front() const { return List<Object>::front(); }
-	void clear() { List<Object>::clear(); }
-	friend std::ostream& operator<<(std::ostream& out, const Queue<Object>& q) {
-		for (typename List<Object>::const_iterator i = q.begin(); i != q.end(); ++i)
+	void insert(const Object& x) { q.push_back(x); }
+	void insert(Object&& x) { q.push_back(std::move(x)); }
+	void pop() { q.pop_front(); }
+	const Object& front() const { return q.front(); }
+	void clear() { q.clear(); }
+	friend std::ostream& operator<<(std::ostream& out, const Queue<Object>& qq) {
+		
+		for (typename List<Object>::const_iterator i = qq.q.begin(); i != qq.q.end(); ++i)
 			out << *i << " ";
 		return out;
 	}
 private:
+	List<Object> q{};
 };
+
+template<typename Object>
+inline Queue<Object>& Queue<Object>::operator=(const Queue<Object>& rhs) noexcept
+{
+	Queue<Object> copy = rhs;
+	std::swap(*this, copy);
+	return *this;
+}
+
+template<typename Object>
+inline Queue<Object>& Queue<Object>::operator=(Queue<Object>&& rhs) noexcept
+{
+	std::swap(q, rhs.q);
+	return *this;
+}
