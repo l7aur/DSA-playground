@@ -128,9 +128,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BinaryTree.h" />
     <ClCompile Include="test1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AVLTree.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Stack.h" />

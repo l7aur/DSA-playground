@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 template <typename Object>
 class Vector
 {

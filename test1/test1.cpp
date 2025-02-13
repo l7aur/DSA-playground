@@ -3,17 +3,22 @@
 #include "List.h"
 #include "Queue.h"
 #include "Stack.h"
+#include "BinaryTree.h"
+#include "AVLTree.h"
 
 void vectorDemo();
 void listDemo();
 void queueDemo();
 void stackDemo();
+void binaryTreeDemo();
+void AVLTreeDemo();
 
 int main() {
 	//vectorDemo();
 	//listDemo();
 	//queueDemo();
-	stackDemo();
+	//stackDemo();
+	binaryTreeDemo();
 	return 0;
 }
 
@@ -101,4 +106,29 @@ void stackDemo() {
 	std::cout << s2 << '\n';
 	s2.push("america");
 	std::cout << s2 << '\n';
+}
+
+void binaryTreeDemo() {
+	BinaryTree<int> t;
+	t.insert(1);
+	t.insert(2);
+	t.insert(3);
+	t.insert(4);
+	t.insert(5);
+	t.insert(6);
+	t.insert(7);
+	t.insert(8);
+	t.insert(9);
+	t.insert(0);
+	std::cout << t << '\n';
+	t.remove(4);
+	std::cout << t << '\n';
+	t.remove(0);
+	std::cout << t << '\n';
+	t.remove(1);
+	std::cout << t << '\n';
+}
+
+void AVLTreeDemo() {
+
 }

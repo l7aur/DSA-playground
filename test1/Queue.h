@@ -18,6 +18,8 @@ public:
 	void pop() { q.pop_front(); }
 	const Object& front() const { return q.front(); }
 	void clear() { q.clear(); }
+	bool isEmpty() const { return q.empty(); }
+	int size() const { return q.size(); }
 	friend std::ostream& operator<<(std::ostream& out, const Queue<Object>& qq) {
 		
 		for (typename List<Object>::const_iterator i = qq.q.begin(); i != qq.q.end(); ++i)

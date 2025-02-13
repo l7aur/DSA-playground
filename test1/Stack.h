@@ -17,6 +17,8 @@ public:
 	void pop() { s.pop_back(); }
 	const Object& top() const { return s.back(); }
 	void clear() { s.clear(); }
+	bool isEmpty() const { return s.empty(); }
+	int size() const { return s.size(); }
 	friend std::ostream& operator<<(std::ostream& out, const Stack<Object>& ss) {
 		for (typename Vector<Object>::const_iterator i = ss.s.begin(); i != ss.s.end(); ++i)
 			out << *i << " ";
