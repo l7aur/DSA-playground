@@ -18,7 +18,7 @@
     <ClCompile Include="test1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BinaryTree.h">
+    <ClCompile Include="BSTree.h">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>

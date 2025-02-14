@@ -32,15 +32,6 @@ public:
 
 		friend class List<Object>;
 	};
-private:
-	struct Node {
-		Object data;
-		Node* next, * prev;
-		Node(const Object& d = Object{}, Node* p = nullptr, Node* n = nullptr);
-		Node(Object&& d, Node* p = nullptr, Node* n = nullptr);
-	};
-
-public:
 	List() { init(); };
 	~List();
 	List(const List& rhs) noexcept;
@@ -72,6 +63,12 @@ public:
 	iterator erase(iterator from, iterator to);
 
 private:
+	struct Node {
+		Object data;
+		Node* next, * prev;
+		Node(const Object& d = Object{}, Node* p = nullptr, Node* n = nullptr);
+		Node(Object&& d, Node* p = nullptr, Node* n = nullptr);
+	};
 	int theSize;
 	Node* head, * tail;
 

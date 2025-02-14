@@ -3,14 +3,14 @@
 #include "List.h"
 #include "Queue.h"
 #include "Stack.h"
-#include "BinaryTree.h"
+#include "BSTree.h"
 #include "AVLTree.h"
 
 void vectorDemo();
 void listDemo();
 void queueDemo();
 void stackDemo();
-void binaryTreeDemo();
+void BSTreeDemo();
 void AVLTreeDemo();
 
 int main() {
@@ -18,7 +18,7 @@ int main() {
 	//listDemo();
 	//queueDemo();
 	//stackDemo();
-	binaryTreeDemo();
+	BSTreeDemo();
 	return 0;
 }
 
@@ -108,18 +108,10 @@ void stackDemo() {
 	std::cout << s2 << '\n';
 }
 
-void binaryTreeDemo() {
-	BinaryTree<int> t;
-	t.insert(1);
-	t.insert(2);
-	t.insert(3);
-	t.insert(4);
-	t.insert(5);
-	t.insert(6);
-	t.insert(7);
-	t.insert(8);
-	t.insert(9);
-	t.insert(0);
+void BSTreeDemo() {
+	BSTree<int> t;
+	t.insert(5); t.insert(9); t.insert(0); t.insert(2); t.insert(7);
+	t.insert(1); t.insert(3); t.insert(8); t.insert(4); t.insert(6);
 	std::cout << t << '\n';
 	t.remove(4);
 	std::cout << t << '\n';
@@ -127,6 +119,11 @@ void binaryTreeDemo() {
 	std::cout << t << '\n';
 	t.remove(1);
 	std::cout << t << '\n';
+	BSTree<int> t2;
+	t2 = t;
+	std::cout << "copied tree:\n" << t2 << '\n';
+	std::cout << t2.findMax() << '\n';
+	std::cout << t2.findMin() << '\n';
 }
 
 void AVLTreeDemo() {
