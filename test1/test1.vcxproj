@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AVLNode.h" />
     <ClCompile Include="BSTree.h" />
     <ClCompile Include="test1.cpp" />
   </ItemGroup>
@@ -136,6 +137,7 @@
     <ClInclude Include="List.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Stack.h" />
+    <ClInclude Include="BinaryTreeNode.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,5 +1,7 @@
 #pragma once
+
 #include <iostream>
+#include "BinaryTreeNode.h"
 
 template<typename Object>
 class BSTree {
@@ -17,39 +19,31 @@ public:
 	void insert(const Object& x) { insert(x, root); }
 	void insert(Object&& x) { insert(std::move(x), root); }
 	void remove(const Object& x) { remove(x, root); }
-	const Object findMin() { return findMin(root)->element; };
-	const Object findMax() { return findMax(root)->element; };
+	const Object findMin() const { return findMin(root)->element; };
+	const Object findMax() const { return findMax(root)->element; };
 	friend std::ostream& operator<<(std::ostream& out, const BSTree& t) {
 		t.printTree(out, t.root);
 		return out;
 	}
 private:
-	struct BinaryNode {
-		Object element;
-		BinaryNode* left, * right;
-		BinaryNode(const Object& x, BinaryNode* l, BinaryNode* r) 
-			: element(x), left(l), right(r) {}
-		BinaryNode(Object&& x, BinaryNode* l, BinaryNode* r)
-			: element(std::move(x)), left(l), right(r) {}
-	};
 
-	BinaryNode* root;
+	BinaryTreeNode<Object>* root;
 
-	void insert(const Object& x, BinaryNode*& t);
-	void insert(Object&& x, BinaryNode*& t);
-	void remove(const Object& x, BinaryNode*& t);
-	bool contains(const Object& x, BinaryNode* t) const;
-	void makeEmpty(BinaryNode*& t);
-	void printTree(std::ostream& out, BinaryNode* t, int depth = 0) const;
-	BinaryNode* clone(BinaryNode* t) const;
-	BinaryNode* findMin(BinaryNode* t) const {
+	void insert(const Object& x, BinaryTreeNode<Object>*& t);
+	void insert(Object&& x, BinaryTreeNode<Object>*& t);
+	void remove(const Object& x, BinaryTreeNode<Object>*& t);
+	bool contains(const Object& x, BinaryTreeNode<Object>* t) const;
+	void makeEmpty(BinaryTreeNode<Object>*& t);
+	void printTree(std::ostream& out, BinaryTreeNode<Object>* t, int depth = 0) const;
+	BinaryTreeNode<Object>* clone(BinaryTreeNode<Object>* t) const;
+	BinaryTreeNode<Object>* findMin(BinaryTreeNode<Object>* t) const {
 		if (t == nullptr)
 			return nullptr;
 		while (t->left != nullptr)
 			t = t->left;
 		return t;
 	}
-	BinaryNode* findMax(BinaryNode* t) const {
+	BinaryTreeNode<Object>* findMax(BinaryTreeNode<Object>* t) const {
 		if (t == nullptr)
 			return nullptr;
 		while (t->right != nullptr)
@@ -59,25 +53,25 @@ private:
 };
 
 template<typename Object>
-inline void BSTree<Object>::insert(const Object& x, BinaryNode*& t)
+inline void BSTree<Object>::insert(const Object& x, BinaryTreeNode<Object>*& t)
 {
 	if (t == nullptr)
-		t = new BinaryNode{ x, nullptr, nullptr };
+		t = new BinaryTreeNode<Object>{ x };
 	else
 		(x < t->element) ? insert(x, t->left) : insert(x, t->right);
 }
 
 template<typename Object>
-inline void BSTree<Object>::insert(Object&& x, BinaryNode*& t)
+inline void BSTree<Object>::insert(Object&& x, BinaryTreeNode<Object>*& t)
 {
 	if (t == nullptr)
-		t = new BinaryNode{ std::move(x), nullptr, nullptr };
+		t = new BinaryTreeNode<Object>{ std::move(x) };
 	else
 		(x < t->element) ? insert(std::move(x), t->left) : insert(std::move(x), t->right);
 }
 
 template<typename Object>
-inline void BSTree<Object>::remove(const Object& x, BinaryNode*& t)
+inline void BSTree<Object>::remove(const Object& x, BinaryTreeNode<Object>*& t)
 {
 	if (t == nullptr)
 		return;
@@ -90,14 +84,14 @@ inline void BSTree<Object>::remove(const Object& x, BinaryNode*& t)
 		remove(t->element, t->right);
 	}
 	else {
-		BinaryNode* oldNode = t;
+		BinaryTreeNode<Object>* oldNode = t;
 		t = (t->left != nullptr) ? t->left : t->right;
 		delete oldNode;
 	}
 }
 
 template<typename Object>
-inline bool BSTree<Object>::contains(const Object& x, BinaryNode* t) const
+inline bool BSTree<Object>::contains(const Object& x, BinaryTreeNode<Object>* t) const
 {
 	if (t == nullptr)
 		return false;
@@ -107,7 +101,7 @@ inline bool BSTree<Object>::contains(const Object& x, BinaryNode* t) const
 }
 
 template<typename Object>
-inline void BSTree<Object>::makeEmpty(BinaryNode*& t)
+inline void BSTree<Object>::makeEmpty(BinaryTreeNode<Object>*& t)
 {
 	if (t == nullptr)
 		return;
@@ -118,7 +112,7 @@ inline void BSTree<Object>::makeEmpty(BinaryNode*& t)
 }
 
 template<typename Object>
-inline void BSTree<Object>::printTree(std::ostream& out, BinaryNode* t, int depth) const
+inline void BSTree<Object>::printTree(std::ostream& out, BinaryTreeNode<Object>* t, int depth) const
 {
 	//pre-order traversal
 	if (t == nullptr)
@@ -131,11 +125,11 @@ inline void BSTree<Object>::printTree(std::ostream& out, BinaryNode* t, int dept
 }
 
 template<typename Object>
-inline typename BSTree<Object>::BinaryNode* BSTree<Object>::clone(BinaryNode* t) const
+inline typename BinaryTreeNode<Object>* BSTree<Object>::clone(BinaryTreeNode<Object>* t) const
 {
 	return (t == nullptr)
 		? nullptr
-		: new BinaryNode{ t->element, clone(t->left), clone(t->right) };
+		: new BinaryTreeNode<Object>{ t->element, clone(t->left), clone(t->right) };
 }
 
 template<typename Object>

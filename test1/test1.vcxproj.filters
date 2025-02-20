@@ -21,6 +21,9 @@
     <ClCompile Include="BSTree.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="AVLNode.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="AVLTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BinaryTreeNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

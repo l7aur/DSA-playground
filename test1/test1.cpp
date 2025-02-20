@@ -18,7 +18,8 @@ int main() {
 	//listDemo();
 	//queueDemo();
 	//stackDemo();
-	BSTreeDemo();
+	//BSTreeDemo();
+	AVLTreeDemo();
 	return 0;
 }
 
@@ -127,5 +128,7 @@ void BSTreeDemo() {
 }
 
 void AVLTreeDemo() {
-
+	AVLTree<int> t;
+	t.insert(3); t.insert(2); t.insert(1);
+	std::cout << t << '\n';
 }
