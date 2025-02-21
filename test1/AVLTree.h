@@ -142,8 +142,8 @@ inline void AVLTree<Object>::balance(AVLNode<Object>*& t)
 			? rotateWithLeftChild(t)
 			: doubleWithLeftChild(t);
 	}
-	else {
-		(getHeight(t->right->left) >= getHeight(t->right->right))
+	else if (getHeight(t->right) - getHeight(t->left) > ALLOWED_IMBALANCE_FACTOR) {
+		(getHeight(t->right->right) >= getHeight(t->right->left))
 			? rotateWithRightChild(t)
 			: doubleWithRightChild(t);
 	}
