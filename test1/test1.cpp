@@ -7,6 +7,7 @@
 #include "BSTree.h"
 #include "AVLTree.h"
 #include "ChainedHashTable.h"
+#include "QuadrProbHashTable.h"
 
 void vectorDemo();
 void listDemo();
@@ -15,6 +16,7 @@ void stackDemo();
 void BSTreeDemo();
 void AVLTreeDemo();
 void ChainedHTDemo();
+void QuadrProbHTDemo();
 
 int main() {
 	//vectorDemo();
@@ -23,7 +25,8 @@ int main() {
 	//stackDemo();
 	//BSTreeDemo();
 	//AVLTreeDemo();
-	ChainedHTDemo();
+	//ChainedHTDemo();
+	QuadrProbHTDemo();
 	return 0;
 }
 
@@ -159,6 +162,36 @@ void ChainedHTDemo() {
 
 	tab.insert(f); tab.insert(f1); tab.insert(f2);
 	std::cout << tab << '\n';
+	status = tab.remove(e);
+	std::cout << ((status == true) ? "Remove succeeded\n" : "Remove failed\n");
+	status = tab.remove(f);
+	std::cout << ((status == true) ? "Remove succeeded\n" : "Remove failed\n");
+	std::cout << tab << '\n';
+}
+void QuadrProbHTDemo() {
+	QuadrProbHashTable<Employee> tab{ 10 };
+	Employee e{ "Eugen Popescu", 10.2, 54 };
+	Employee e1{ "Fugen Oopescu", 100.4, 72 };
+	Employee e2{ "Dugen Qopescu", 999.9 , 44 };
+	Employee f{ "Mihai Abramovici", 2030.5, 44 };
+	Employee f1{ "Ion Abramovici", 2200.5, 53 };
+	Employee f2{ "Vasile Abramovici", 2010.5, 13 };
+
+	bool status = tab.insert(e);
+	std::cout << ((status == true) ? "Insert succeeded\n" : "Insert failed\n");
+	status = tab.insert(e1);
+	std::cout << ((status == true) ? "Insert succeeded\n" : "Insert failed\n");
+	status = tab.insert(e2);
+	std::cout << ((status == true) ? "Insert succeeded\n" : "Insert failed\n");
+	status = tab.insert(f);
+	std::cout << ((status == true) ? "Insert succeeded\n" : "Insert failed\n");
+	status = tab.insert(f1);
+	std::cout << ((status == true) ? "Insert succeeded\n" : "Insert failed\n");
+	status = tab.insert(f2);
+	std::cout << ((status == true) ? "Insert succeeded\n" : "Insert failed\n");
+
+	std::cout << tab << '\n';
+	
 	status = tab.remove(e);
 	std::cout << ((status == true) ? "Remove succeeded\n" : "Remove failed\n");
 	status = tab.remove(f);

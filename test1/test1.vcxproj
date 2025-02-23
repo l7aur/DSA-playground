@@ -138,6 +138,7 @@
     <ClInclude Include="Hash.h" />
     <ClInclude Include="ChainedHashTable.h" />
     <ClInclude Include="List.h" />
+    <ClInclude Include="QuadrProbHashTable.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="BinaryTreeNode.h" />

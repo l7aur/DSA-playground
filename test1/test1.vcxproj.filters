@@ -13,45 +13,57 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Hashing">
+      <UniqueIdentifier>{e5cca7d5-bc7d-40fa-b280-51dbd4d785a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Trees">
+      <UniqueIdentifier>{5d3ba7ea-d99b-4f6e-9b0b-e82432c2576e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Basics">
+      <UniqueIdentifier>{50e06246-d8f4-4151-b230-b7fbff78a895}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BSTree.h">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="AVLNode.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Trees</Filter>
+    </ClCompile>
+    <ClCompile Include="BSTree.h">
+      <Filter>Header Files\Trees</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="List.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Stack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Queue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AVLTree.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BinaryTreeNode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ChainedHashTable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hash.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Hashing</Filter>
     </ClInclude>
     <ClInclude Include="Employee.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Hashing</Filter>
+    </ClInclude>
+    <ClInclude Include="Hash.h">
+      <Filter>Header Files\Hashing</Filter>
+    </ClInclude>
+    <ClInclude Include="AVLTree.h">
+      <Filter>Header Files\Trees</Filter>
+    </ClInclude>
+    <ClInclude Include="BinaryTreeNode.h">
+      <Filter>Header Files\Trees</Filter>
+    </ClInclude>
+    <ClInclude Include="List.h">
+      <Filter>Header Files\Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files\Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack.h">
+      <Filter>Header Files\Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="Queue.h">
+      <Filter>Header Files\Basics</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadrProbHashTable.h">
+      <Filter>Header Files\Hashing</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
