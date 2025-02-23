@@ -1,10 +1,12 @@
 #include <iostream>
+#include "Employee.h"
 #include "Vector.h"
 #include "List.h"
 #include "Queue.h"
 #include "Stack.h"
 #include "BSTree.h"
 #include "AVLTree.h"
+#include "ChainedHashTable.h"
 
 void vectorDemo();
 void listDemo();
@@ -12,6 +14,7 @@ void queueDemo();
 void stackDemo();
 void BSTreeDemo();
 void AVLTreeDemo();
+void ChainedHTDemo();
 
 int main() {
 	//vectorDemo();
@@ -19,7 +22,8 @@ int main() {
 	//queueDemo();
 	//stackDemo();
 	//BSTreeDemo();
-	AVLTreeDemo();
+	//AVLTreeDemo();
+	ChainedHTDemo();
 	return 0;
 }
 
@@ -43,7 +47,6 @@ void vectorDemo() {
 	std::cout << s << '\n';
 	std::cout << s[1];
 }
-
 void listDemo() {
 	List<int> l;
 	l.push_back(1);
@@ -61,7 +64,6 @@ void listDemo() {
 	std::cout << l << '\n';
 
 }
-
 void queueDemo() {
 	Queue<int> q;
 	q.insert(2);
@@ -87,7 +89,6 @@ void queueDemo() {
 	std::cout << "q: " << q << "\nq3: " << q3 << '\n';
 
 }
-
 void stackDemo() {
 	Stack<int> s;
 	s.push(30);
@@ -108,7 +109,6 @@ void stackDemo() {
 	s2.push("america");
 	std::cout << s2 << '\n';
 }
-
 void BSTreeDemo() {
 	BSTree<int> t;
 	t.insert(5); t.insert(9); t.insert(0); t.insert(2); t.insert(7);
@@ -126,7 +126,6 @@ void BSTreeDemo() {
 	std::cout << t2.findMax() << '\n';
 	std::cout << t2.findMin() << '\n';
 }
-
 void AVLTreeDemo() {
 	AVLTree<int> t;
 	t.insert(3); t.insert(2); t.insert(1);
@@ -142,4 +141,27 @@ void AVLTreeDemo() {
 	t.insert(13); t.insert(12); t.insert(11);
 	t.insert(10); t.insert(8); t.insert(9);
 	std::cout << t << '\n';
+}
+void ChainedHTDemo() {
+	ChainedHashTable<Employee> tab{5};
+	Employee e{ "Eugen Popescu", 10.2, 54 };
+	Employee e1{ "Fugen Oopescu", 100.4, 72 };
+	Employee e2{ "Dugen Qopescu", 999.9 , 44 };
+	Employee f{ "Mihai Abramovici", 2030.5, 44 };
+	Employee f1{ "Ion Abramovici", 2200.5, 53 };
+	Employee f2{ "Vasile Abramovici", 2010.5, 13 };
+	bool status = tab.insert(e);
+	std::cout << ((status == true) ? "Insert succeeded\n" : "Insert failed\n");
+	status = tab.insert(e1); 
+	std::cout << ((status == true) ? "Insert succeeded\n" : "Insert failed\n");
+	status = tab.insert(e2);
+	std::cout << ((status == true) ? "Insert succeeded\n" : "Insert failed\n");
+
+	tab.insert(f); tab.insert(f1); tab.insert(f2);
+	std::cout << tab << '\n';
+	status = tab.remove(e);
+	std::cout << ((status == true) ? "Remove succeeded\n" : "Remove failed\n");
+	status = tab.remove(f);
+	std::cout << ((status == true) ? "Remove succeeded\n" : "Remove failed\n");
+	std::cout << tab << '\n';
 }

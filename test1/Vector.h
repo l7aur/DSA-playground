@@ -7,33 +7,33 @@ class Vector
 {
 public:
 	// constructor
-	explicit Vector(int initialSize = 0);
+	explicit Vector(size_t initialSize = 0);
 	
 	// destructor
 	~Vector() { delete[] objects; };
 	
 	// copy constructor
-	Vector(const Vector& rhs);
+	Vector(const Vector& rhs) noexcept;
 	
 	// copy assignment
-	Vector& operator=(const Vector& rhs);
+	Vector& operator=(const Vector& rhs) noexcept;
 	
 	// move constructor
-	Vector(Vector&& rhs);
+	Vector(Vector&& rhs) noexcept;
 	
 	// move assignment
-	Vector& operator=(Vector&& rhs);
+	Vector& operator=(Vector&& rhs) noexcept;
 
 	// index operators
 	Object& operator[](int index) { return objects[index]; };
 	const Object& operator[](int index) const { return objects[index]; };
 
 	//methods
-	void resize(int newSize);
-	void reserve(int capacity);
+	void resize(size_t newSize);
+	void reserve(size_t capacity);
 	bool isEmpty() const { return size() == 0; };
-	int size() { return theSize; };
-	int capacity() const { return theCapacity; };
+	size_t size() const { return theSize; };
+	size_t capacity() const { return theCapacity; };
 	void push_back(const Object& x);
 	void push_back(Object&& x);
 	void pop_back() { --theSize; };
@@ -51,8 +51,8 @@ public:
 
 	static const int SPARE_CAPACITY = 16;
 private:
-	int theSize;
-	int theCapacity;
+	size_t theSize;
+	size_t theCapacity;
 	Object* objects;
 };
 
@@ -66,14 +66,14 @@ std::ostream& operator<<(std::ostream& out, const Vector<Object>& v)
 }
 
 template<typename Object>
-inline Vector<Object>::Vector(int initialSize)
+inline Vector<Object>::Vector(size_t initialSize)
 	: theSize(initialSize), theCapacity(initialSize + SPARE_CAPACITY)
 {
 	objects = new Object[theCapacity];
 }
 
 template<typename Object>
-inline Vector<Object>::Vector(const Vector& rhs)
+inline Vector<Object>::Vector(const Vector& rhs) noexcept
 	: theSize(rhs.theSize), theCapacity(rhs.theCapacity), objects(nullptr)
 {
 	objects = new Object[theCapacity];
@@ -82,7 +82,7 @@ inline Vector<Object>::Vector(const Vector& rhs)
 }
 
 template<typename Object>
-inline Vector<Object>& Vector<Object>::operator=(const Vector& rhs)
+inline Vector<Object>& Vector<Object>::operator=(const Vector& rhs) noexcept
 {
 	Vector copy = rhs;
 	std::swap(*this, copy);
@@ -90,7 +90,7 @@ inline Vector<Object>& Vector<Object>::operator=(const Vector& rhs)
 }
 
 template<typename Object>
-inline Vector<Object>::Vector(Vector&& rhs)
+inline Vector<Object>::Vector(Vector&& rhs) noexcept
 	: theSize(rhs.theSize), theCapacity(rhs.theCapacity), objects(rhs.objects)
 {
 	rhs.objects = nullptr;
@@ -98,7 +98,7 @@ inline Vector<Object>::Vector(Vector&& rhs)
 }
 
 template<typename Object>
-inline Vector<Object>& Vector<Object>::operator=(Vector&& rhs)
+inline Vector<Object>& Vector<Object>::operator=(Vector&& rhs) noexcept
 {
 	std::swap(this->theSize, rhs.theSize);
 	std::swap(this->theCapacity, rhs.theCapacity);
@@ -107,7 +107,7 @@ inline Vector<Object>& Vector<Object>::operator=(Vector&& rhs)
 }
 
 template<typename Object>
-inline void Vector<Object>::resize(int newSize)
+inline void Vector<Object>::resize(size_t newSize)
 {
 	if (newSize > theCapacity)
 		reserve(newSize + 2);
@@ -115,7 +115,7 @@ inline void Vector<Object>::resize(int newSize)
 }
 
 template<typename Object>
-inline void Vector<Object>::reserve(int capacity)
+inline void Vector<Object>::reserve(size_t capacity)
 {
 	if (capacity <= theSize)
 		return;

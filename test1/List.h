@@ -16,15 +16,16 @@ public:
 
 	protected:
 		struct List<Object>::Node* current;
-		const Object& retrieve() const { return current->data; };
+		Object& retrieve() const { return current->data; };
 		const_iterator(struct List<Object>::Node* p) : current(p) {};
 
 		friend class List<Object>;
 	};
-	class iterator : public const_iterator{
+	class iterator : public const_iterator {
 	public:
 		iterator() {};
-		Object& operator*() { return const_iterator::operator*(); };
+		Object& operator*() { return const_iterator::retrieve(); };
+		const Object& operator*() const { return const_iterator::operator*(); };
 		iterator& operator++();
 		iterator& operator++(int);
 	protected:
@@ -61,6 +62,18 @@ public:
 	iterator insert(iterator itr, Object&& x);
 	iterator erase(iterator itr);
 	iterator erase(iterator from, iterator to);
+	iterator find(const Object& x, const iterator start, const iterator finish) {
+		for (iterator i = start; i != finish; ++i)
+			if (*i == x)
+				return i;
+		return end();
+	}
+	const_iterator find(const Object& x, const const_iterator start, const_iterator finish) const {
+		for (const_iterator i = start; i != finish; ++i)
+			if (*i == x)
+				return i;
+		return end();
+	}
 
 private:
 	struct Node {

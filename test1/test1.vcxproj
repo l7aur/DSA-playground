@@ -134,6 +134,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AVLTree.h" />
+    <ClInclude Include="Employee.h" />
+    <ClInclude Include="Hash.h" />
+    <ClInclude Include="ChainedHashTable.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Stack.h" />
