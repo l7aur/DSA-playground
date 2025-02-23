@@ -40,10 +40,9 @@ private:
 	
 	bool isActive(size_t currentPos) const { return (array[static_cast<int>(currentPos)].info == ACTIVE); }
 	size_t findPos(const Object& x) const;
-	void rehash() { };
+	void rehash();
 	size_t myHash(const Object& x) const;
 	size_t nextPrime(const size_t& x) const;
-	//int qProbingF(const int& i) const { return i * i; }
 };
 
 template<typename Object>
@@ -56,6 +55,7 @@ std::ostream& operator<<(std::ostream& out, const QuadrProbHashTable<Object>& ta
 template<typename Object>
 inline size_t QuadrProbHashTable<Object>::findPos(const Object& x) const
 {
+	/* does the probing */
 	/*
 	this method supposes the load factor is below 0.5
 	
@@ -73,6 +73,19 @@ inline size_t QuadrProbHashTable<Object>::findPos(const Object& x) const
 			currentPos -= static_cast<int>(array.size());
 	}
 	return static_cast<size_t>(currentPos);
+}
+
+template<typename Object>
+inline void QuadrProbHashTable<Object>::rehash()
+{
+	Vector<HashEntry> oldArray = array;
+	array.resize(nextPrime(2 * oldArray.size()));
+	for (auto i = oldArray.begin(); i != oldArray.end(); ++i)
+		i->info = EMPTY;
+	currentSize = 0;
+	for (auto i = oldArray.begin(); i != oldArray.end(); ++i)
+		if (i->info == ACTIVE)
+			insert(std::move(i->element));
 }
 
 template<typename Object>

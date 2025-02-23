@@ -26,7 +26,7 @@ int main() {
 	//BSTreeDemo();
 	//AVLTreeDemo();
 	//ChainedHTDemo();
-	QuadrProbHTDemo();
+	//QuadrProbHTDemo();
 	return 0;
 }
 
@@ -169,7 +169,7 @@ void ChainedHTDemo() {
 	std::cout << tab << '\n';
 }
 void QuadrProbHTDemo() {
-	QuadrProbHashTable<Employee> tab{ 10 };
+	QuadrProbHashTable<Employee> tab{ 3 };
 	Employee e{ "Eugen Popescu", 10.2, 54 };
 	Employee e1{ "Fugen Oopescu", 100.4, 72 };
 	Employee e2{ "Dugen Qopescu", 999.9 , 44 };
