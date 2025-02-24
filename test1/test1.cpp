@@ -8,6 +8,7 @@
 #include "AVLTree.h"
 #include "ChainedHashTable.h"
 #include "QuadrProbHashTable.h"
+#include "CuckooHashTable.h"
 
 void vectorDemo();
 void listDemo();
@@ -17,6 +18,7 @@ void BSTreeDemo();
 void AVLTreeDemo();
 void ChainedHTDemo();
 void QuadrProbHTDemo();
+void CuckooHTDemo();
 
 int main() {
 	//vectorDemo();
@@ -197,4 +199,8 @@ void QuadrProbHTDemo() {
 	status = tab.remove(f);
 	std::cout << ((status == true) ? "Remove succeeded\n" : "Remove failed\n");
 	std::cout << tab << '\n';
+}
+void CuckooHTDemo() {
+	//StringHashFamily<10> hashFam;
+	CuckooHashTable<int, StringHashFamily<10>> tab{};
 }

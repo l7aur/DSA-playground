@@ -134,6 +134,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AVLTree.h" />
+    <ClInclude Include="CuckooHashFamily.h" />
+    <ClInclude Include="CuckooHashTable.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="Hash.h" />
     <ClInclude Include="ChainedHashTable.h" />
@@ -142,6 +144,7 @@
     <ClInclude Include="Queue.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="BinaryTreeNode.h" />
+    <ClInclude Include="Util.h" />
     <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

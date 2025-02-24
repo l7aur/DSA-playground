@@ -4,6 +4,7 @@
 #include <string>
 #include "Vector.h"
 #include "Hash.h"
+#include "Util.h"
 
 /* SUPPOSE A LOAD FACTOR OF AT MOST 0.5 FOR CORRECT FUNCTIONALITY */
 /* 
@@ -15,7 +16,7 @@
 template<typename Object>
 class QuadrProbHashTable {
 public:
-	explicit QuadrProbHashTable(size_t size = 101) : array(nextPrime(size)) { makeEmpty(); }
+	explicit QuadrProbHashTable(size_t size = 101) : array(Util::nextPrime(size)) { makeEmpty(); }
 	bool contains(const Object& x) const { return isActive(findPos(x)); }
 	void makeEmpty();
 	bool insert(const Object& x);
@@ -42,7 +43,6 @@ private:
 	size_t findPos(const Object& x) const;
 	void rehash();
 	size_t myHash(const Object& x) const;
-	size_t nextPrime(const size_t& x) const;
 };
 
 template<typename Object>
@@ -79,7 +79,7 @@ template<typename Object>
 inline void QuadrProbHashTable<Object>::rehash()
 {
 	Vector<HashEntry> oldArray = array;
-	array.resize(nextPrime(2 * oldArray.size()));
+	array.resize(Util::nextPrime(2 * oldArray.size()));
 	for (auto i = oldArray.begin(); i != oldArray.end(); ++i)
 		i->info = EMPTY;
 	currentSize = 0;
@@ -93,32 +93,6 @@ inline size_t QuadrProbHashTable<Object>::myHash(const Object& x) const
 {
 	static Hash<Object> h;
 	return h(x) % array.size();
-}
-
-template<typename Object>
-inline size_t QuadrProbHashTable<Object>::nextPrime(const size_t& x) const
-{
-	size_t aux = x;
-	while (true) {
-		bool isPrime = true;
-		if (aux % 2 == 0) {
-			aux++;
-			continue;
-		}
-		for (size_t i = 3; i * i < aux; i += 2)
-			if (aux % i == 0) {
-				isPrime = false;
-				break;
-			}
-		if (isPrime) {
-			if (aux < x)
-				std::cerr << "Searching for the next prime overflowed!\n";
-			return aux;
-		}
-		aux++;
-	}
-	std::cerr << "No next prime after " << x << " was found!\n";
-	return 0;
 }
 
 template<typename Object>

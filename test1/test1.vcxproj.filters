@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Basics">
       <UniqueIdentifier>{50e06246-d8f4-4151-b230-b7fbff78a895}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Hashing\Cuckoo">
+      <UniqueIdentifier>{57839a84-dd0b-4d42-9c32-d9813fa56d16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test1.cpp">
@@ -64,6 +67,15 @@
     </ClInclude>
     <ClInclude Include="QuadrProbHashTable.h">
       <Filter>Header Files\Hashing</Filter>
+    </ClInclude>
+    <ClInclude Include="CuckooHashTable.h">
+      <Filter>Header Files\Hashing\Cuckoo</Filter>
+    </ClInclude>
+    <ClInclude Include="CuckooHashFamily.h">
+      <Filter>Header Files\Hashing\Cuckoo</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
